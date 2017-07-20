@@ -1,6 +1,6 @@
 import { Contact } from './../../../../shared/models/contact';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ContactService } from '../../../../shared/services/contact.service';
 import { Observable } from 'rxjs/Rx';
 
@@ -19,29 +19,40 @@ export class ModelDrivenComponent implements OnInit {
     "Meh"
   ]
 
-  public genders = ['Male','Female','Transgender','None']
+  public genders = ['Male', 'Female', 'Transgender', 'None']
 
-  private contactForm: FormGroup;
+  public contactForm: FormGroup;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
     this.contactForm = new FormGroup({
+      'userdata': new FormGroup({
         'fullname': new FormControl('Full Name Default', [Validators.required]),
-        'email': new FormControl('model@ng2.com', [Validators.required]),
-        'password': new FormControl('pw', Validators.required),
-        'claim': new FormControl('Claim to fame'),
-        'gender': new FormControl('Male'),
-        'mood': new FormControl('Meh')
+        'email': new FormControl('model@ng2.com', [Validators.required, Validators.email]),
+        'password': new FormControl(null, Validators.required)
+      }),
+
+      'claim': new FormControl('Claim to fame'),
+      'gender': new FormControl('Male'),
+      'mood': new FormControl('Meh'),
+      'hobbies': new FormArray([])
     });
   }
 
-  onSubmit(){
+  onSubmit(): void {
     let contact: Contact = new Contact();
-    contact.fullName = this.contactForm.value.fullname;
-    contact.email = this.contactForm.value.email;
-    contact.password = this.contactForm.value.password;
+    contact.fullName = this.contactForm.value.userdata.fullname;
+    contact.email = this.contactForm.value.userdata.email;
+    contact.password = this.contactForm.value.userdata.password;
     this.contactService.saveContact(contact);
+    console.log(this.contactForm.value);
   }
 
+  onAddHobbie(): void {
+    
+
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.contactForm.get('hobbies')).push(control);
+  }
 }

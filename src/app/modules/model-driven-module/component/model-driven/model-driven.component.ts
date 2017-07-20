@@ -11,24 +11,17 @@ import { Observable } from 'rxjs/Rx';
   providers: [ContactService]
 })
 export class ModelDrivenComponent implements OnInit {
-  public moods = [
-    "Happy",
-    "Hungry",
-    "Fat",
-    "Angry",
-    "Meh"
-  ]
-
-  public genders = ['Male', 'Female', 'Transgender', 'None']
-
-  public contactForm: FormGroup;
+  moods = [ "Happy", "Hungry", "Fat", "Angry", "Meh" ]
+  genders = ['Male', 'Female', 'Transgender', 'None']
+  forbiddenFullNames = ['Brent', 'Bob']
+  contactForm: FormGroup;
 
   constructor(private contactService: ContactService) { }
 
   ngOnInit() {
     this.contactForm = new FormGroup({
       'userdata': new FormGroup({
-        'fullname': new FormControl('Full Name Default', [Validators.required]),
+        'fullname': new FormControl('Full Name Default', [Validators.required, this.forbiddenNames.bind(this)]),
         'email': new FormControl('model@ng2.com', [Validators.required, Validators.email]),
         'password': new FormControl(null, Validators.required)
       }),
@@ -50,9 +43,15 @@ export class ModelDrivenComponent implements OnInit {
   }
 
   onAddHobbie(): void {
-    
-
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.contactForm.get('hobbies')).push(control);
+  }
+
+  forbiddenNames(control: FormControl) : {[s: string]: boolean}{
+    if( this.forbiddenFullNames.indexOf(control.value) !== -1)
+    {
+      return {'nameIsForbidden': true};
+    }
+    return null;
   }
 }

@@ -13,6 +13,7 @@
             <div *ngIf="!contactForm.get('userdata.fullname').valid && (!contactForm.get('userdata.fullname').pristine || contactForm.get('userdata.fullname').touched)"
               class="alert alert-danger alert-margin-top-5">
               <div [hidden]="!contactForm.get('userdata.fullname').errors.required">Full name is required</div>
+              <div [hidden]="!contactForm.get('userdata.fullname').errors.nameIsForbidden">This name is forbidden</div>
             </div>
 
           </div>

@@ -1,6 +1,6 @@
 import { Contact } from './../../../../shared/models/contact';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContactService } from '../../../../shared/services/contact.service';
 import { Observable } from 'rxjs/Rx';
 
@@ -27,9 +27,9 @@ export class ModelDrivenComponent implements OnInit {
 
   ngOnInit() {
     this.contactForm = new FormGroup({
-        'fullname': new FormControl('Full Name Default'),
-        'email': new FormControl('model@ng2.com'),
-        'password': new FormControl('pw'),
+        'fullname': new FormControl('Full Name Default', [Validators.required]),
+        'email': new FormControl('model@ng2.com', [Validators.required]),
+        'password': new FormControl('pw', Validators.required),
         'claim': new FormControl('Claim to fame'),
         'gender': new FormControl('Male'),
         'mood': new FormControl('Meh')

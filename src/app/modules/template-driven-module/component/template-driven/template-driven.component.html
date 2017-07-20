@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+      <form class="" (ngSubmit)="onSubmit(formReference)" #formReference="ngForm" novalidate>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" class="form-control" id="fullname" name="fullname" [(ngModel)]="formdata.fullName" required #fullname="ngModel" >
+          <div *ngIf="!fullname.valid && (!fullname.pristine || fullname.touched)" class="alert alert-danger alert-margin-top-5">
+            <div [hidden]="!fullname.errors.required">Full name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="formdata.email" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="formdata.password">
+        </div>
+        <div class="form-group">
+          <label>Claim To Fame</label>
+          <textarea class="form-control" id="claim" name="claim" [(ngModel)]="formdata.claimToFame"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Mood</label>
+          <select class="form-control" id="mood" name="mood" [(ngModel)]="formdata.mood">
+            <option *ngFor="let mood of moods" [value]="mood" >{{mood}}</option>
+          </select>
+        </div>
+        
+
+        <div class="form-group">
+          <label>Age Range</label>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">0-9</label>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="">10-19</label>
+          </div>
+          <div class="checkbox disabled">
+            <label><input type="checkbox" value="" disabled>20-29</label>
+          </div>
+          <hr>
+          <label class="checkbox-inline"><input type="checkbox" value="">30-39</label>
+          <label class="checkbox-inline"><input type="checkbox" value="">40-49</label>
+          <label class="checkbox-inline"><input type="checkbox" value="">50+</label>
+        </div>
+
+
+        <div class="form-group">
+          <label>Highest Qalification</label>
+          <div class="radio">
+            <label><input type="radio" name="optradio1" value="Doctorate" [(ngModel)]="formdata.highestQualification">Doctorate</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="optradio2" value="Masters Degree" [(ngModel)]="formdata.highestQualification">Masters Degree</label>
+          </div>
+          <div class="radio disabled">
+            <label><input type="radio" name="optradio3" value="Bachelors Degree" [(ngModel)]="formdata.highestQualification">Bachelors Degree</label>
+          </div>
+          <hr>
+          <label class="radio-inline"><input type="radio" name="optradio4" value="Certificate" [(ngModel)]="formdata.highestQualification">Certificate</label>
+          <label class="radio-inline"><input type="radio" name="optradio5" value="University Entrance" [(ngModel)]="formdata.highestQualification">University Entrance</label>
+          <label class="radio-inline"><input type="radio" name="optradio6" value="High School" [(ngModel)]="formdata.highestQualification">High School</label>
+          <hr>
+        </div>
+        <button type="submit" class="btn btn-default">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

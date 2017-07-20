@@ -20,13 +20,13 @@ export const MainRouter: Routes = [
         path: 'tech',
         loadChildren: '../tech-module/tech.module#TechModule'     // 
     },
-    //{
-    //    path: 'model',
-    //    loadChildren: '../model-driven-module/model.module#ModelModule'     // 
-    //},
+    {
+        path: 'model',
+        loadChildren: '../model-driven-module/model-driven.module#ModelDrivenModule'     // 
+    },
     {
         path: 'template',
-        loadChildren: '../template-driven-module/template.module#TemplateModule'     // 
+        loadChildren: '../template-driven-module/template-driven.module#TemplateDrivenModule'     // 
     },
 ];
 

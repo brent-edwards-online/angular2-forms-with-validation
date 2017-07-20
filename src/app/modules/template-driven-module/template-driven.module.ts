@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
-import { TemplateRoutes } from "./template.router";
+import { TemplateDrivenRoutes } from "./template-driven.router";
 import { RouterModule } from '@angular/router'; 
 
 import { TemplateComponent } from './component/template/template.component';
-import { FrameworkComponent } from './component/framework/framework.component';
+import { TemplateDrivenComponent } from './component/template-driven/template-driven.component';
 
 @NgModule({
   declarations: [
     TemplateComponent,
-    FrameworkComponent
+    TemplateDrivenComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
     HttpModule,
-    TemplateRoutes,
+    TemplateDrivenRoutes,
     RouterModule
   ],
   providers: [],
   bootstrap: [TemplateComponent]
 })
-export class TemplateModule { }
+export class TemplateDrivenModule { }

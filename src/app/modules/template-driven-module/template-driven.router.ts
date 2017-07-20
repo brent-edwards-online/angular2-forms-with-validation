@@ -2,24 +2,24 @@ import { ModuleWithProviders, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TemplateComponent } from './component/template/template.component';
-import { FrameworkComponent } from './component/framework/framework.component';
+import { TemplateDrivenComponent } from './component/template-driven/template-driven.component';
 
-export const TemplateRouter: Routes = [
+export const TemplateDrivenRouter: Routes = [
   {
     path: '',
     component: TemplateComponent,  
     children: [
         { 
             path: '', 
-            redirectTo: 'framework', 
+            redirectTo: 'template-driven', 
             pathMatch: 'full' 
         },
         { 
-            path: 'framework', 
-            component: FrameworkComponent 
+            path: 'template-driven', 
+            component: TemplateDrivenComponent 
         }
     ]
   }
 ];
 
-export const TemplateRoutes: ModuleWithProviders = RouterModule.forChild(TemplateRouter);
+export const TemplateDrivenRoutes: ModuleWithProviders = RouterModule.forChild(TemplateDrivenRouter);
